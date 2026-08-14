@@ -29,14 +29,14 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      # 4. Build and push the project
-      - name: Build and push the project
+      # 4. Build and push ADMIN
+      - name: Build and push admin
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_NAME: final-project
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG ./final-project
+          docker build -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG ./admin
           docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
 
       # 5. Build and push FRONTEND
